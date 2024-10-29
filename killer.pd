@@ -1,0 +1,50 @@
+#N canvas 344 371 759 536 12;
+#X obj 320 187 loadbang;
+#X obj 559 187 namecanvas \$0_killer;
+#X obj 320 314 v killer;
+#X obj 320 339 sel 0;
+#X msg 417 459 \; \$1_killer menuclose;
+#X obj 352 449 \$0;
+#X obj 352 474 s killer;
+#X obj 352 423 t b f;
+#X obj 320 212 t b b;
+#X obj 40 93 r kill_me;
+#X text 367 218 hide this killer instance;
+#X text 113 93 patch to be killed;
+#X obj 352 236 \$0;
+#X msg 352 260 \; \$1_killer vis 0;
+#X obj 40 227 symbol;
+#X msg 40 261 \; pd-\$1 menuclose;
+#X text 316 93 REASONING: Pd doesn't deal well with menuclose requests
+that originate (in a direct chain reaction) from the same patch that
+wants to be closed. The solution is to postpone this request and make
+it appear as being originated inside this killer patch., f 55;
+#X obj 40 151 del 0;
+#X text 40 23 USAGE: from patch_to_be_closed send:;
+#X obj 40 118 t b s;
+#X text 91 151 this [del 0] breaks the "chain reaction" and causes
+Pd to believe that the menuclose below originates here., f 30;
+#X text 316 23 \; pd open killer.pd <current_directory> \; kill_me
+symbol patch_to_be_closed.pd;
+#X text 389 314 garbage collector: kills previous killer instances
+\, so that only one stays active at any given time., f 43;
+#X obj 352 371 pipe 1;
+#X text 408 371 <- this isn't necessary in this example \, but may
+become necessary if you increase the chain from [r kill_me] to the
+menuclose to include more complex computation., f 43;
+#X connect 0 0 8 0;
+#X connect 2 0 3 0;
+#X connect 3 0 5 0;
+#X connect 3 1 23 0;
+#X connect 5 0 6 0;
+#X connect 7 0 5 0;
+#X connect 7 1 4 0;
+#X connect 8 0 2 0;
+#X connect 8 1 12 0;
+#X connect 9 0 19 0;
+#X connect 12 0 13 0;
+#X connect 14 0 15 0;
+#X connect 17 0 14 0;
+#X connect 19 0 17 0;
+#X connect 19 1 14 1;
+#X connect 23 0 7 0;
