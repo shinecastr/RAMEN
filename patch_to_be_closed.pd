@@ -1,0 +1,29 @@
+#N canvas 0 371 404 495 12;
+#X msg 66 34 bang;
+#X obj 38 39 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 35 306 to see the killer patch:;
+#X msg 70 85 dir;
+#X obj 70 110 pdcontrol;
+#X obj 38 59 t b b;
+#X msg 38 138 symbol patch_to_be_closed.pd;
+#X obj 38 163 pack s s;
+#X msg 38 193 \; pd open killer.pd \$2 \; kill_me symbol \$1;
+#X msg 38 355 dir;
+#X obj 38 380 pdcontrol;
+#X msg 38 410 \; pd open killer.pd \$1 \; pd-killer.pd vis 1;
+#X obj 38 332 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 122 34 <- click here to close this patch. killer.pd should
+be in the same directory., f 38;
+#X connect 0 0 5 0;
+#X connect 1 0 5 0;
+#X connect 3 0 4 0;
+#X connect 4 0 7 1;
+#X connect 5 0 6 0;
+#X connect 5 1 3 0;
+#X connect 6 0 7 0;
+#X connect 7 0 8 0;
+#X connect 9 0 10 0;
+#X connect 10 0 11 0;
+#X connect 12 0 9 0;
