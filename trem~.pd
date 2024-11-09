@@ -1,4 +1,4 @@
-#N canvas 0 25 488 847 12;
+#N canvas 0 25 1178 847 12;
 #X obj 607 135 *~;
 #X obj 23 288 hsl 360 84 0 100 0 1 empty empty gain 0 -32 1 48 #fcfcfc #000000 #000000 23600 0;
 #X obj 592 678 dac~, f 5;
@@ -101,4 +101,4 @@
 #X connect 40 0 41 0;
 #X connect 41 0 29 0;
 #X connect 44 0 32 0;
-#X coords 0 -1 1 1 480 800 2 0 0;
+#X coords 0 -1 1 1 481 801 2 0 0;
