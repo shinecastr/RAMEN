@@ -10,14 +10,29 @@ RAMEN relies on [Patchbox OS 2024-04-04](https://community.blokas.io/t/beta-patc
 
 ### Componenents
 
-- Raspberry Pi 5 8Gb
+- Raspberry Pi 5 8 GB
 - HiFiBerry DAC2 ADC Pro
 - Pimoroni NVMe Base
 - NVMe SSD
+- Hoysond 5 in. Touch Screen Display 
 
 ​	**Misc. Components**
 
-- (2) 1/4" TS Connectors
+- (2) 1/4" Female TS Connectors
+- Male RCA Connector
+- 1/8" Male TRS Connector
+- M3 hardware
+
+### Assembly
+
+1. Print out the provided case files
+2. Attach the HiFiBerry hat to the Pi
+3. Install the SSD and attach the NVMe base to the Pi with the provided flex cable
+4. Screw the Pi into the case from below
+5. Attach the screen to the Pi via  HDMI and USB
+6. Screw in the lid, securing the display
+
+Now connect the device with a USB-C power supply
 
 ## Setup and Configuration
 
@@ -57,21 +72,28 @@ dtoverlay=w1-gpio
 dtoverlay=vc4-kms-v3d -> dtoverlay=vc4-kms-v3d,noaudio
 ```
 
-- Unmount the edited image and flash it to an NVMe SSD using [Balena Etcher](https://balenaetcher.io) or another disk imaging tool
+Unmount the edited image and flash it to an NVMe SSD using [Balena Etcher](https://balenaetcher.io) or another disk imaging tool
 
 ### Patchbox Config
 
-#### [**Note:** The default user is `patch` and its password is `blokaslabs`]
+**The default user is `patch` and its password is `blokaslabs`**
 
-**You can skip through the Jack settings in the Initial Setup Wizard as RAMEN relies on the ALSA audio backend**
+You can skip through the Jack settings in the Initial Setup Wizard as RAMEN relies on the ALSA audio backend
 
-**Enter the Patchbox Configuration Utility by typing `patchbox` in the terminal and make the following selections** 
+Enter the Patchbox Configuration Utility by typing `patchbox` in the terminal and make the following selections 
 
 ```
 boot > environment > desktop autologin
 module > none
 jack > stop
 kernel > install-rt
+```
+
+Install `unclutter` with `sudo apt install unclutter` and add the following to your .bashrc
+
+```
+unclutter -idle 0.01 -root
+puredata path/to/repo/trem.pd
 ```
 
 ### ALSA Config
@@ -88,10 +110,16 @@ kernel > install-rt
 
 **Under the Media tab select DSP On and ALSA then enter Audio Settings**
 
-- Sample rate: 96000
+- Sample rate: 192000
 - Delay (msec): 5
 - Block size 64
 - Input Devices: snd_rpi_hifiberry_dacplusadcpro (hardware)
 - Output Devices: snd_rpi_hifiberry_dacplusadcpro (hardware)
 
-#### [Note: All included patches are mono but RAMEN is configured to output in stereo]
+Install the kiosk-plugin external through PureData's built-in external manager
+
+Replace kiosk.cfg with the included file or set the following parameters
+
+```
+
+```
