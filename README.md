@@ -16,7 +16,7 @@ RAMEN relies on [Patchbox OS 2024-04-04](https://community.blokas.io/t/beta-patc
 - NVMe SSD
 - Hoysond 5 in. Touch Screen Display 
 
-​	**Misc. Components**
+### Misc. Components
 
 - (2) 1/4" Female TS Connectors
 - Male RCA Connector
@@ -31,8 +31,6 @@ RAMEN relies on [Patchbox OS 2024-04-04](https://community.blokas.io/t/beta-patc
 4. Screw the Pi into the case from below
 5. Attach the screen to the Pi via  HDMI and USB
 6. Screw in the lid, securing the display
-
-Now connect the device with a USB-C power supply
 
 ## Setup and Configuration
 
@@ -89,12 +87,7 @@ jack > stop
 kernel > install-rt
 ```
 
-Install `unclutter` with `sudo apt install unclutter` and add the following to your .bashrc
-
-```
-unclutter -idle 0.01 -root
-puredata path/to/repo/trem.pd
-```
+Run `./hide_cursor.sh` to hide the cursor 
 
 ### ALSA Config
 
@@ -118,8 +111,13 @@ puredata path/to/repo/trem.pd
 
 Install the kiosk-plugin external through PureData's built-in external manager
 
-Replace kiosk.cfg with the included file or set the following parameters
+Edit kiosk.cfg and set the following parameters
 
 ```
-
+KioskNewWindow True
+ShowMenu False
+FullScreen True
+QuitOnClose False
+HidePopup True
+ScrollBars False
 ```
